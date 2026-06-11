@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sakura_denki</title>
+    <style>
+        /* 全体のデザイン設定 */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ヘッダー（一番上のタイトル部分） */
+        /* ヘッダー全体の設定（ロゴと文字を横並びにする） */
+        header {
+            background-color: #0076a3; /* 部活のイメージカラー */
+            color: #fff;
+            padding: 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* パソコン画面では中央寄せ */
+            gap: 20px;
+        }
+
+        /* ロゴ画像用のスタイル */
+        .header-logo {
+            width: 80px;  /* ロゴの横幅（好みに合わせて調整してください） */
+            height: 80px; /* ロゴの縦幅 */
+            object-fit: contain; /* 画像が歪まないように調整 */
+        }
+
+        /* ヘッダーの文字部分の並び */
+        .header-text {
+            text-align: left; /* 文字は左詰めに */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin: 0.3rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 【追加】スマホ画面用の調整 */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column; /* スマホではロゴと文字を縦並びにしてスッキリさせる */
+                text-align: center;
+            }
+            .header-text {
+                text-align: center;
+            }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツの枠組み */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* 各セクション（見出しと内容の塊） */
+        section {
+            background: #fff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #0076a3;
+            border-left: 5px solid #0076a3;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+
+        /* アピールポイント（魅力）のスタイル */
+        .points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .point-card {
+            background: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-top: 4px solid #0076a3;
+        }
+
+        .point-card h3 {
+            margin-top: 0;
+            color: #005577;
+        }
+
+        /* テーブル（基本情報）のスタイル */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            width: 30%;
+        }
+
+        /* フッター（一番下） */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #333;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        /* 写真ギャラリーのスタイル */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            aspect-ratio: 4 / 3; /* 写真の比率を4:3に統一 */
+            background-color: #eee; /* 画像が読み込まれる前の背景色 */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 枠線に合わせて画像を自動トリミング */
+            transition: transform 0.3s ease;
+        }
+
+        /* マウスを乗せたときに少しズームする演出 */
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 写真のキャプション（説明文） */
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* スクラッチ埋め込み用のスタイル */
+        .scratch-section {
+            margin-top: 1.5rem;
+        }
+
+        /* プルダウンのボタン */
+        .scratch-toggle {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0076a3;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+            transition: background-color 0.2s ease;
+        }
+
+        .scratch-toggle:hover {
+            background-color: #005577;
+        }
+
+        /* 矢印アイコンの演出 */
+        .scratch-toggle::after {
+            content: '▼';
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s;
+        }
+
+        .scratch-toggle.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* コンテンツの開閉設定 */
+        .scratch-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #fdfdfd;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* スクラッチの画面サイズ（スマホ対応） */
+        .scratch-container {
+            width: 100%;
+            max-width: 499px; /* スクラッチの標準横幅より少し小さめ */
+            aspect-ratio: 485 / 402; /* スクラッチプレイヤーの比率 */
+            padding: 10px;
+        }
+
+        .scratch-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* スマホ対応の調整 */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            section { padding: 1.5rem; }
+            table th, table td { display: block; width: 100%; box-sizing: border-box; }
+            table th { background-color: #0076a3; color: white; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>★佐倉高校_電気部★</h1>
+        <p>＼初心者_未経験者大歓迎！一緒に楽しむ仲間を募集中！／</p>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2>部活の紹介</h2>
+            <p>
+                こんにちは！電気部です。私たちは現在、少人数だからこそ「全員が主役」になれるアットホームな環境で、楽しく活動しています！<br>
+                「高校から新しいことを始めたい」「勉強やバイトと両立したい」という人にぴったりの部活です。
+            </p>
+            
+            <div class="points">
+                <div class="point-card">
+                    <h3>① 全員が主役！</h3>
+                    <p>人数が少ない分、1年目から確実に試合や本番のステージで活躍できます！</p>
+                </div>
+                <div class="point-card">
+                    <h3>② 未経験でも安心</h3>
+                    <p>今の先輩たちも、ほとんどが高校からスタートしました。イチから優しく教えます！</p>
+                </div>
+                <div class="point-card">
+                    <h3>③ 両立しやすい</h3>
+                    <p>週2日の活動なので、勉強や塾、アルバイトの時間もしっかりキープできます。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新しく追加する写真ギャラリーセクション -->
+        <section>
+            <h2>活動の様子（ギャラリー）</h2>
+            <p>普段の練習やイベントの雰囲気です！少人数ですが毎日楽しく活動しています。</p>
+            
+            <div class="gallery">
+                <!-- 写真1 -->
+                <div class="gallery-item">
+                    <img src="★ここに写真1のファイル名（例: photo1.jpg）" alt="練習風景1">
+                    <div class="gallery-caption">★普段の練習風景</div>
+                </div>
+                <!-- 写真2 -->
+                <div class="gallery-item">
+                    <img src="★ここに写真2のファイル名" alt="練習風景2">
+                    <div class="gallery-caption">★大会・発表会の様子</div>
+                </div>
+                <!-- 写真3 -->
+                <div class="gallery-item">
+                    <img src="★ここに写真3のファイル名" alt="イベント風景">
+                    <div class="gallery-caption">★みんなでレクリエーション</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>制作物の紹介（ゲーム・作品）</h2>
+            <p>電気部員が制作したScratchの作品です。ボタンを押すと実際にここで遊べます！</p>
+            
+            <div class="scratch-section">
+                <button class="scratch-toggle">🎮 作品1：ゲームをプレイする</button>
+                <div class="scratch-content">
+                    <div class="scratch-container">
+                        <iframe src="https://scratch.mit.edu/projects/★ここにスクラッチの作品IDを入力/embed" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>活動内容・基本情報</h2>
+            <table>
+                <tr>
+                    <th>活動日時</th>
+                    <td>毎週 月曜日と木曜日 の 帰りの会のすぐ後～最終下校まで</td>
+                </tr>
+                <tr>
+                    <th>活動場所</th>
+                    <td>本館四階のパソコン室</td>
+                </tr>
+                <tr>
+                    <th>部員数</th>
+                    <td>★3年生：4名、2年生：0名、1年生 : 7名</td>
+                </tr>
+                <tr>
+                    <th>部費</th>
+                    <td>★月0円</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>新入生のみなさんへ</h2>
+            <p><strong>「道具を持っていないけど大丈夫？」</strong><br>⇒ 最初は体験用の道具を貸し出すので、手ぶらで見学に来てOKです！</p>
+            <p><strong>「少し興味があるだけなんだけど…」</strong><br>⇒ 大歓迎です！仮入部期間だけでなく、いつでも見学・体験をお待ちしています。まずは雰囲気をのぞきに来てください！</p>
+        </section>
+
+        <section>
+            <h2>見学・入部についてのお問い合わせ</h2>
+            <p>事前連絡は不要です！活動時間内に、直接佐藤神の部屋へお越しください。</p>
+            <p>質問がある場合は、顧問の佐藤神、またはお近くの部員までお気軽に声をかけてください！</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ★佐倉高校 電気部 All Rights Reserved.It's uso.</p>
+    </footer>
+
+</body>
+<script>
+        // プルダウン（アコーディオン）の開閉処理
+        const toggles = document.querySelectorAll('.scratch-toggle');
+        
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                
+                if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                    content.style.maxHeight = '0px';
+                } else {
+                    // スムーズに開くために、要素の実際の高さを計算して指定
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</html>
