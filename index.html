@@ -13,7 +13,19 @@
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
-        }
+
+            background-image: url('saitousin1.jpg'); /* 部活のロゴや縦長画像 */
+            background-repeat: no-repeat;
+    
+            /* 【超重要】画像を画面の「高さ」に合わせることで、巨大化を防ぎます */
+            background-size: auto 100vh; 
+    
+            /* 画像を画面の中央に配置 */
+            background-position: center center;
+    
+            /* スクロールしても背景の「枠」自体はその場に固定します */
+            background-attachment: fixed;       /* 画像を繰り返して表示させない */
+            }
 
         /* ヘッダー（一番上のタイトル部分） */
         /* ヘッダー全体の設定（ロゴと文字を横並びにする） */
@@ -301,17 +313,17 @@
             <div class="gallery">
                 <!-- 写真1 -->
                 <div class="gallery-item">
-                    <img src="34766.jpg" alt="練習風景1">
+                    <img src="saitousin1.jpg" alt="練習風景1">
                     <div class="gallery-caption">★普段の練習風景</div>
                 </div>
                 <!-- 写真2 -->
                 <div class="gallery-item">
-                    <img src="34766.jpg" alt="練習風景2">
+                    <img src="saitousin2.jpg" alt="練習風景2">
                     <div class="gallery-caption">★大会・発表会の様子</div>
                 </div>
                 <!-- 写真3 -->
                 <div class="gallery-item">
-                    <img src="34766.jpg" alt="イベント風景">
+                    <img src="saitousin3.jpg" alt="イベント風景">
                     <div class="gallery-caption">★みんなでレクリエーション</div>
                 </div>
             </div>
@@ -389,5 +401,22 @@
                 }
             });
         });
+
+        // 既存のプルダウン処理の下に追加してください
+
+        // スクロールに合わせて背景画像をゆっくり動かす処理（パララックス）
+        window.addEventListener('scroll', () => {
+        // ページ全体の高さから画面の高さを引いた「最大スクロール量」
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        
+        if (maxScroll > 0) {
+            // スクロール率を 0 〜 100 の間で計算
+            const scrollPercent = (window.scrollY / maxScroll) * 100;
+            
+            // 【ここがポイント】
+            // スクロールに合わせて、背景の縦の位置（Y軸）を 0% から 100% へ滑らかに動かします。
+            document.body.style.backgroundPosition = `center ${scrollPercent}%`;
+        }
+    });
     </script>
 </html>
