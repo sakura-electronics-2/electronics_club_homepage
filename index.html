@@ -260,6 +260,26 @@
             border: none;
         }
 
+        /* Unityゲームボタン */
+        .play-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #0076a3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        .play-button:hover {
+            background-color: #005577;
+            transform: translateY(-2px);
+        }
+
         /* スマホ対応の調整 */
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
@@ -331,16 +351,19 @@
 
         <section>
             <h2>制作物の紹介（ゲーム・作品）</h2>
-            <p>電気部員が制作したScratchの作品です。ボタンを押すと実際にここで遊べます！<br>※現在調整中...</p>
-            
-            <div class="scratch-section">
-                <button class="scratch-toggle">🎮 作品1：ゲームをプレイする</button>
-                <div class="scratch-content">
-                    <div class="scratch-container">
-                        <iframe src="https://scratch.mit.edu/projects/★ここにスクラッチの作品IDを入力/embed" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
+
+            <p>
+                電気部員がUnityで制作したオリジナルゲームです。<br>
+                ブラウザですぐに遊べますので、ぜひチャレンジしてみてください！
+            </p>
+
+            <a href="game/" class="play-button">
+                🎮 ゲームをプレイ
+            </a>
+
+            <p style="margin-top:15px; color:#666;">
+                ※ゲームは別ページで開きます。
+            </p>
         </section>
 
         <section>
@@ -385,22 +408,6 @@
 
 </body>
 <script>
-        // プルダウン（アコーディオン）の開閉処理
-        const toggles = document.querySelectorAll('.scratch-toggle');
-        
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                const content = this.nextElementSibling;
-                
-                if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                    content.style.maxHeight = '0px';
-                } else {
-                    // スムーズに開くために、要素の実際の高さを計算して指定
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        });
 
         // 既存のプルダウン処理の下に追加してください
 
